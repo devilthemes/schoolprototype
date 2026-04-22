@@ -3,7 +3,7 @@
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Link from "next/link";
 
-export default function Home() {
+export default function ForgotPassword() {
   return (
     <div className="d-flex align-items-center py-4 bg-body-tertiary">
       <Container>
@@ -19,7 +19,10 @@ export default function Home() {
                     width="72"
                     height="57"
                   />
-                  <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                  <h1 className="h3 mb-3 fw-normal">Reset Password</h1>
+                  <p className="text-body-secondary">
+                    Enter your email address and we&apos;ll send you a link to reset your password.
+                  </p>
                 </div>
 
                 <Form.Floating className="mb-3">
@@ -31,27 +34,15 @@ export default function Home() {
                   <Form.Label htmlFor="floatingInput">Email address</Form.Label>
                 </Form.Floating>
 
-                <Form.Floating className="mb-3">
-                  <Form.Control
-                    type="password"
-                    id="floatingPassword"
-                    placeholder="Password"
-                  />
-                  <Form.Label htmlFor="floatingPassword">Password</Form.Label>
-                </Form.Floating>
-
-                <div className="d-flex justify-content-between align-items-center my-3">
-                  <Form.Check
-                    type="checkbox"
-                    label="Remember me"
-                    id="checkDefault"
-                  />
-                  <Link href="/forgotpassword" className="text-decoration-none">Forgot password?</Link>
-                </div>
-
                 <Button variant="primary" size="lg" type="submit" className="w-100 py-2">
-                  Sign in
+                  Change Password
                 </Button>
+
+                <div className="text-center mt-3">
+                  <Link href="/" className="text-decoration-none">
+                    Back to Sign In
+                  </Link>
+                </div>
 
                 <p className="mt-5 mb-3 text-body-secondary text-center">
                   &copy; 2017–2025
