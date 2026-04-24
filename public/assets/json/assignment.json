@@ -1,0 +1,9 @@
+{
+  "title": "Assignment: Create a Model of the Solar System",
+  "objective": "The purpose of this assignment is to understand the structure of the solar system by creating a physical or digital model.",
+  "introduction": "The solar system consists of the Sun and all celestial bodies that orbit around it. The planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.",
+  "files":[
+    "test.pdf",
+    "text.txt"
+  ]
+}

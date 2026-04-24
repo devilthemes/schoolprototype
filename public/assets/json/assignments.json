@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Math Assignment 1",
+        "description": "Complete exercises 1-10 on page 23.",
+        "start_date": "2024-09-01",
+        "due_date": "2024-09-15",
+        "status": "pending",
+        "total_marks": 100,
+        "total_files": 2
+    },
+    {
+        "id": 2,
+        "title": "Science Project",
+        "description": "Create a model of the solar system.",
+        "start_date": "2024-09-05",
+        "due_date": "2024-09-20",
+        "status": "completed",
+        "total_marks": 150,
+        "total_files": 3
+    },
+    {
+        "id": 3,
+        "title": "History Essay",
+        "description": "Write an essay on the causes of World War II.",
+        "start_date": "2024-09-10",
+        "due_date": "2024-09-25",
+        "status": "started",
+        "total_marks": 100,
+        "total_files": 1
+    },
+    {
+        "id": 4,
+        "title": "English Literature Analysis",
+        "description": "Analyze the themes in 'To Kill a Mockingbird'.",
+        "start_date": "2024-09-15",
+        "due_date": "2024-09-30",
+        "status": "not started",
+        "total_marks": 100,
+        "total_files": 2
+    },
+    {
+        "id": 5,
+        "title": "Computer Science Coding Assignment",
+        "description": "Write a program to implement a basic calculator.",
+        "start_date": "2024-09-20",
+        "due_date": "2024-10-05",
+        "status": "pending",
+        "total_marks": 150,
+        "total_files": 3
+    },
+    {
+        "id": 6,
+        "title": "Physical Education Fitness Plan",
+        "description": "Create a fitness plan for a week.",
+        "start_date": "2024-09-25",
+        "due_date": "2024-10-10",
+        "status": "pending",
+        "total_marks": 50,
+        "total_files": 1
+    },
+    {
+        "id": 7,
+        "title": "Art Project",
+        "description": "Create a painting using watercolors.",
+        "start_date": "2024-10-01",
+        "due_date": "2024-10-15",
+        "status": "pending",
+        "total_marks": 100,
+        "total_files": 2
+    },
+    {
+        "id": 8,
+        "title": "Music Composition",
+        "description": "Compose a short piece of music using a digital audio workstation.",
+        "start_date": "2024-10-05",
+        "due_date": "2024-10-20",
+        "status": "pending",
+        "total_marks": 150,
+        "total_files": 3
+    },
+    {
+        "id": 9,
+        "title": "Geography Research Paper",
+        "description": "Write a research paper on the impact of climate change on coastal cities.",
+        "start_date": "2024-10-10",
+        "due_date": "2024-10-25",
+        "status": "pending",
+        "total_marks": 100,
+        "total_files": 2
+    },
+    {
+        "id": 10,
+        "title": "Economics Case Study",
+        "description": "Analyze the economic impact of a recent global event.",
+        "start_date": "2024-10-15",
+        "due_date": "2024-10-30",
+        "status": "pending",
+        "total_marks": 150,
+        "total_files": 3
+    }
+]

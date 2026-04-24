@@ -1,0 +1,75 @@
+Objective
+
+The purpose of this assignment is to understand the structure of the solar system by creating a physical or digital model that represents the planets, their order, and their relative positions around the Sun.
+
+Introduction
+
+The solar system consists of the Sun and all celestial bodies that orbit around it, including eight planets, moons, asteroids, and comets. The planets, in order from the Sun, are:
+
+Mercury
+Venus
+Earth
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune
+
+Creating a model helps visualize how these planets are arranged and how they differ in size and distance.
+
+Materials Required
+
+(For a physical model)
+
+Thermocol balls / clay / paper balls
+Paints or colored paper
+Cardboard or chart paper
+Glue and scissors
+Sticks or thread (to hold planets)
+Marker or pen (for labeling)
+
+(For a digital model)
+
+Computer or laptop
+Software like PowerPoint, Blender, or any design tool
+Procedure
+Step 1: Plan the Model
+
+Decide whether you will create a 3D model, 2D chart, or digital version.
+
+Step 2: Create the Sun
+
+Make the Sun the largest object and place it at the center of your model.
+
+Step 3: Make the Planets
+
+Create each planet with different sizes and colors:
+
+Mercury – small and gray
+Venus – yellowish
+Earth – blue and green
+Mars – red
+Jupiter – largest with stripes
+Saturn – rings around it
+Uranus – light blue
+Neptune – dark blue
+Step 4: Arrange the Planets
+
+Place the planets in correct order from the Sun. Keep approximate spacing between them.
+
+Step 5: Label the Planets
+
+Clearly write the name of each planet.
+
+Step 6: Add Extra Details (Optional)
+Asteroid belt (between Mars and Jupiter)
+Rings of Saturn
+Orbits using circular lines
+Observation
+
+While creating the model, we observe:
+
+Planets are arranged in a specific order
+Inner planets are smaller and rocky
+Outer planets are larger and gaseous
+The Sun is the central and largest body
