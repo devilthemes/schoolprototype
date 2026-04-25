@@ -1,7 +1,1 @@
-export default function Library() {
-  return (
-    <>
-      <h1>Library</h1>
-    </>
-  );
-}
+app/schooladmin/library/page.tsx
