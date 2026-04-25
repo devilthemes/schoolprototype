@@ -1,6 +1,9 @@
-import { useState } from 'react';
-import Table from 'react-bootstrap/Table';
-
+"use client";
+import { useState } from "react";
+import Table from "react-bootstrap/Table";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 const LibraryPage = () => {
   const [data, setData] = useState([
     { class: "1", files: 20, bookmarks: 5 },
@@ -12,7 +15,7 @@ const LibraryPage = () => {
     { class: "7", files: 80, bookmarks: 11 },
     { class: "8", files: 90, bookmarks: 12 },
     { class: "9", files: 100, bookmarks: 13 },
-    { class: "10", files: 110, bookmarks: 14 }
+    { class: "10", files: 110, bookmarks: 14 },
   ]);
 
   return (
