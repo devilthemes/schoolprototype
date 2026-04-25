@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
 const LibraryPage = () => {
   const [data, setData] = useState([
     { class: "1", files: 20, bookmarks: 5 },
@@ -24,6 +25,7 @@ const LibraryPage = () => {
         <Row className="justify-content-center">
           <Col xs={12} sm={10} md={8} lg={6} xl={5}>
             <main className="form-signin w-100 m-auto">
+              <h1>Library</h1>
               <Table striped bordered hover>
                 <thead>
                   <tr>
