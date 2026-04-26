@@ -20,9 +20,10 @@ interface StudentItem {
   phone: string;
   profileImage: string | null;
   parentName: string;
+  rollNo: string; // Added missing property
 }
 
-const AssignLibraryModal = ({ show, handleClose, students }) => {
+const AssignLibraryModal = ({ show, handleClose, students }: { show: boolean; handleClose: () => void; students: StudentItem[] }) => {
   const [selectedStudents, setSelectedStudents] = useState<number[]>([]);
 
   const handleStudentSelect = (id: number) => {
@@ -66,7 +67,7 @@ const LibrarySubjectDetailPage = () => {
   const router = useRouter();
   const [showAssignLibraryModal, setShowAssignLibraryModal] = useState(false);
   const students: StudentItem[] = [
-    { id: 1, name: "John Doe", className: "Class 1", section: "A", email: "john@example.com", phone: "1234567890", profileImage: null, parentName: "Jane Doe" },
+    { id: 1, name: "John Doe", className: "Class 1", section: "A", email: "john@example.com", phone: "1234567890", profileImage: null, parentName: "Jane Doe", rollNo: "1" },
     // Add more students as needed
   ];
 
