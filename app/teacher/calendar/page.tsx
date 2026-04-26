@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import "react-quill-new/dist/quill.snow.css";
 import {
   Container,
   Table,
@@ -46,9 +43,9 @@ const initialEvents: CalendarEvent[] = [
   },
 ];
 
-export default function CalendarPage() {
+export default function TeacherCalendarPage() {
   const [events, setEvents] = useState<CalendarEvent[]>(initialEvents);
-  
+
   // Modal states
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -64,13 +61,13 @@ export default function CalendarPage() {
     type: "event",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleDescriptionChange = (value: string) => {
-    setFormData({ ...formData, description: value });
   };
 
   const handleAddEvent = (e: React.FormEvent) => {
@@ -91,7 +88,7 @@ export default function CalendarPage() {
     e.preventDefault();
     if (currentEvent) {
       const updatedEvents = events.map((ev) =>
-        ev.id === currentEvent.id ? { ...ev, ...formData } : ev
+        ev.id === currentEvent.id ? { ...ev, ...formData } : ev,
       );
       setEvents(updatedEvents as CalendarEvent[]);
       setShowEditModal(false);
@@ -136,15 +133,12 @@ export default function CalendarPage() {
   return (
     <Container fluid className="py-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">School Calendar</h1>
-        <Button variant="primary" onClick={() => setShowAddModal(true)}>
-          Add Event
-        </Button>
+        <h1 className="h2">Teacher Calendar</h1>
       </div>
 
-      <Calendar 
-        events={events} 
-        onEventClick={(event) => openDetailModal(event)} 
+      <Calendar
+        events={events}
+        onEventClick={(event) => openDetailModal(event)}
       />
 
       <Card>
@@ -159,45 +153,53 @@ export default function CalendarPage() {
               </tr>
             </thead>
             <tbody>
-              {events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event) => (
-                <tr key={event.id}>
-                  <td>{event.date}</td>
-                  <td>{event.title}</td>
-                  <td>
-                    <Badge bg={event.type === "holiday" ? "danger" : "info"}>
-                      {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
-                    </Badge>
-                  </td>
-                  <td>
-                    <div className="d-flex gap-2">
-                      <Button 
-                        variant="outline-info" 
-                        size="sm" 
-                        onClick={() => openDetailModal(event)}
-                      >
-                        Detail
-                      </Button>
-                      <Button 
-                        variant="outline-primary" 
-                        size="sm" 
-                        onClick={() => openEditModal(event)}
-                      >
-                        Edit
-                      </Button>
-                      <Button 
-                        variant="outline-danger" 
-                        size="sm" 
-                        onClick={() => openDeleteConfirm(event)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {events
+                .sort(
+                  (a, b) =>
+                    new Date(a.date).getTime() - new Date(b.date).getTime(),
+                )
+                .map((event) => (
+                  <tr key={event.id}>
+                    <td>{event.date}</td>
+                    <td>{event.title}</td>
+                    <td>
+                      <Badge bg={event.type === "holiday" ? "danger" : "info"}>
+                        {event.type.charAt(0).toUpperCase() +
+                          event.type.slice(1)}
+                      </Badge>
+                    </td>
+                    <td>
+                      <div className="d-flex gap-2">
+                        <Button
+                          variant="outline-info"
+                          size="sm"
+                          onClick={() => openDetailModal(event)}
+                        >
+                          Detail
+                        </Button>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          onClick={() => openEditModal(event)}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={() => openDeleteConfirm(event)}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               {events.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="text-center py-4">No events found.</td>
+                  <td colSpan={4} className="text-center py-4">
+                    No events found.
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -206,7 +208,14 @@ export default function CalendarPage() {
       </Card>
 
       {/* Add Modal */}
-      <Modal show={showAddModal} onHide={() => { setShowAddModal(false); resetForm(); }} centered>
+      <Modal
+        show={showAddModal}
+        onHide={() => {
+          setShowAddModal(false);
+          resetForm();
+        }}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add New Event</Modal.Title>
         </Modal.Header>
@@ -214,20 +223,20 @@ export default function CalendarPage() {
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
-              <Form.Control 
-                type="text" 
-                name="title" 
-                required 
+              <Form.Control
+                type="text"
+                name="title"
+                required
                 onChange={handleInputChange}
                 placeholder="Event Title"
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Date</Form.Label>
-              <Form.Control 
-                type="date" 
-                name="date" 
-                required 
+              <Form.Control
+                type="date"
+                name="date"
+                required
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -240,23 +249,41 @@ export default function CalendarPage() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <ReactQuill 
-                theme="snow"
-                value={formData.description}
-                onChange={handleDescriptionChange}
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="description"
+                onChange={handleInputChange}
                 placeholder="Short description..."
               />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => { setShowAddModal(false); resetForm(); }}>Cancel</Button>
-            <Button variant="primary" type="submit">Add to Calendar</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShowAddModal(false);
+                resetForm();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Add to Calendar
+            </Button>
           </Modal.Footer>
         </Form>
       </Modal>
 
       {/* Edit Modal */}
-      <Modal show={showEditModal} onHide={() => { setShowEditModal(false); resetForm(); }} centered>
+      <Modal
+        show={showEditModal}
+        onHide={() => {
+          setShowEditModal(false);
+          resetForm();
+        }}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Event</Modal.Title>
         </Modal.Header>
@@ -264,49 +291,72 @@ export default function CalendarPage() {
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
-              <Form.Control 
-                type="text" 
-                name="title" 
-                value={formData.title} 
-                required 
+              <Form.Control
+                type="text"
+                name="title"
+                value={formData.title}
+                required
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Date</Form.Label>
-              <Form.Control 
-                type="date" 
-                name="date" 
-                value={formData.date} 
-                required 
+              <Form.Control
+                type="date"
+                name="date"
+                value={formData.date}
+                required
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Type</Form.Label>
-              <Form.Select name="type" value={formData.type} onChange={handleInputChange}>
+              <Form.Select
+                name="type"
+                value={formData.type}
+                onChange={handleInputChange}
+              >
                 <option value="event">Event</option>
                 <option value="holiday">Holiday</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <ReactQuill 
-                theme="snow"
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="description"
                 value={formData.description}
-                onChange={handleDescriptionChange}
+                onChange={handleInputChange}
               />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => { setShowEditModal(false); resetForm(); }}>Cancel</Button>
-            <Button variant="primary" type="submit">Update Event</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShowEditModal(false);
+                resetForm();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Update Event
+            </Button>
           </Modal.Footer>
         </Form>
       </Modal>
 
       {/* Detail Modal */}
-      <Modal show={showDetailModal} onHide={() => { setShowDetailModal(false); resetForm(); }} centered>
+      <Modal
+        show={showDetailModal}
+        onHide={() => {
+          setShowDetailModal(false);
+          resetForm();
+        }}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Event Details</Modal.Title>
         </Modal.Header>
@@ -314,34 +364,68 @@ export default function CalendarPage() {
           {currentEvent && (
             <div>
               <h5>{currentEvent.title}</h5>
-              <p><strong>Date:</strong> {currentEvent.date}</p>
-              <p><strong>Type:</strong> <Badge bg={currentEvent.type === "holiday" ? "danger" : "info"}>{currentEvent.type.toUpperCase()}</Badge></p>
+              <p>
+                <strong>Date:</strong> {currentEvent.date}
+              </p>
+              <p>
+                <strong>Type:</strong>{" "}
+                <Badge bg={currentEvent.type === "holiday" ? "danger" : "info"}>
+                  {currentEvent.type.toUpperCase()}
+                </Badge>
+              </p>
               <hr />
               <h6>Description:</h6>
-              {currentEvent.description ? (
-                <div dangerouslySetInnerHTML={{ __html: currentEvent.description }} />
-              ) : (
-                <p>No description provided.</p>
-              )}
+              <img src="/assets/img/image.jpg" width="500" />
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a
+                pulvinar tortor, sit amet bibendum ante. Praesent eget est
+                ipsum. Morbi et nisi aliquam, sollicitudin elit sed, fermentum
+                ante.
+              </p>
+              <p>
+                {" "}
+                In viverra est felis, vel fermentum massa finibus eu. Nullam leo
+                quam, commodo eu diam sed, pretium ultrices lacus. Nullam vel
+                orci vel neque molestie blandit et a nisi. Quisque orci ligula,
+                fringilla sit amet scelerisque sit amet, sodales sed neque.{" "}
+              </p>
             </div>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => { setShowDetailModal(false); resetForm(); }}>Close</Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowDetailModal(false);
+              resetForm();
+            }}
+          >
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
 
       {/* Delete Confirmation Modal */}
-      <Modal show={showDeleteConfirm} onHide={() => setShowDeleteConfirm(false)} centered size="sm">
+      <Modal
+        show={showDeleteConfirm}
+        onHide={() => setShowDeleteConfirm(false)}
+        centered
+        size="sm"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete this event?
-        </Modal.Body>
+        <Modal.Body>Are you sure you want to delete this event?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteConfirm(false)}>Cancel</Button>
-          <Button variant="danger" onClick={handleDeleteEvent}>Delete</Button>
+          <Button
+            variant="secondary"
+            onClick={() => setShowDeleteConfirm(false)}
+          >
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteEvent}>
+            Delete
+          </Button>
         </Modal.Footer>
       </Modal>
     </Container>

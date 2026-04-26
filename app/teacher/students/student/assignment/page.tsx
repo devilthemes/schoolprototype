@@ -22,7 +22,7 @@ interface Message {
   files?: Array<{ name: string; type: string }>;
 }
 
-export default function AssignmentDetailPage() {
+export default function StudentAssignment() {
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([
     {

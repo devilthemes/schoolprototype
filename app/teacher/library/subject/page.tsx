@@ -46,7 +46,7 @@ const SubjectPage = () => {
                   <td>
                     <Button
                       onClick={() =>
-                        router.push(`/schooladmin/library/subject/detail`)
+                        router.push(`/teacher/library/subject/detail`)
                       }
                     >
                       Detail

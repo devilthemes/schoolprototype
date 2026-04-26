@@ -1,0 +1,239 @@
+Social Media Post Scheduling API – Backend Design
+1. Overview
+
+The system allows users to:
+
+Connect social media accounts (Facebook Page, Instagram Business, LinkedIn Page)
+
+Create posts with text, images, or videos
+
+Schedule posts for a future time
+
+Automatically publish posts at the scheduled time
+
+Track post status (pending, published, failed)
+
+2. Supported Platforms & APIs
+Platform	Official API
+Facebook Page	Meta Graph API
+Instagram Business	Instagram Graph API
+LinkedIn Page	LinkedIn Marketing API
+
+⚠️ Instagram posting requires:
+
+Business or Creator account
+
+Connected to a Facebook Page
+
+3. High-Level Architecture
+Client (Web / Mobile)
+        |
+        v
+Backend API (Express)
+        |
+        ├── Auth Service (JWT / OAuth)
+        ├── Post Service
+        ├── Scheduler (Queue + Worker)
+        ├── Media Service
+        └── Platform Integrations
+               ├── Facebook
+               ├── Instagram
+               └── LinkedIn
+        |
+Database (PostgreSQL)
+Cache / Queue (Redis + BullMQ)
+
+4. Database Schema
+4.1 Users
+users (
+  id UUID PK,
+  name TEXT,
+  email TEXT UNIQUE,
+  password_hash TEXT,
+  created_at TIMESTAMP
+)
+
+4.2 Social Accounts
+social_accounts (
+  id UUID PK,
+  user_id UUID FK,
+  platform ENUM('facebook','instagram','linkedin'),
+  page_id TEXT,
+  page_name TEXT,
+  access_token TEXT,
+  refresh_token TEXT,
+  token_expires_at TIMESTAMP,
+  created_at TIMESTAMP
+)
+
+4.3 Scheduled Posts
+scheduled_posts (
+  id UUID PK,
+  user_id UUID FK,
+  platform ENUM('facebook','instagram','linkedin'),
+  page_id TEXT,
+  content TEXT,
+  media_urls JSONB,
+  scheduled_at TIMESTAMP,
+  status ENUM('pending','published','failed'),
+  error_message TEXT,
+  published_post_id TEXT,
+  created_at TIMESTAMP
+)
+
+5. Authentication Flow
+5.1 Platform OAuth (Example: Facebook & Instagram)
+
+Redirect user to Meta OAuth
+
+Receive authorization code
+
+Exchange code for access token
+
+Fetch pages & Instagram business accounts
+
+Store tokens securely
+
+5.2 LinkedIn OAuth
+
+Similar flow using LinkedIn OAuth 2.0 with:
+
+w_member_social
+
+rw_organization_admin
+
+6. API Endpoints
+6.1 Connect Social Account
+POST /api/social/connect/:platform
+
+
+Request
+
+{
+  "authorization_code": "xxxx"
+}
+
+
+Response
+
+{
+  "success": true,
+  "pages": [
+    {
+      "page_id": "123",
+      "page_name": "My Business Page"
+    }
+  ]
+}
+
+6.2 Create Scheduled Post
+POST /api/posts/schedule
+
+
+Request
+
+{
+  "platform": "linkedin",
+  "page_id": "123",
+  "content": "We are launching a new feature 🚀",
+  "media_urls": [
+    "https://cdn.example.com/image1.jpg"
+  ],
+  "scheduled_at": "2026-02-20T10:00:00Z"
+}
+
+
+Response
+
+{
+  "success": true,
+  "post_id": "uuid"
+}
+
+6.3 List Scheduled Posts
+GET /api/posts?status=pending
+
+6.4 Cancel Scheduled Post
+DELETE /api/posts/:id
+
+7. Scheduler & Worker Logic
+7.1 Job Queue
+
+Use BullMQ / Agenda / Node-Cron
+
+queue.add(
+  "publish-post",
+  { postId },
+  { delay: scheduledTime - Date.now() }
+);
+
+7.2 Worker Execution
+switch (post.platform) {
+  case "facebook":
+    publishToFacebook(post);
+    break;
+  case "instagram":
+    publishToInstagram(post);
+    break;
+  case "linkedin":
+    publishToLinkedIn(post);
+}
+
+8. Platform Posting Logic
+Facebook Page
+
+Endpoint: /me/feed
+
+Supports text + images + videos
+
+Instagram Business
+
+Create media container
+
+Publish container
+
+Endpoint: /media → /media_publish
+
+LinkedIn Page
+
+Upload media
+
+Create UGC Post
+
+Endpoint: /ugcPosts
+
+9. Error Handling & Retries
+Scenario	Action
+Token expired	Refresh token
+API rate limit	Retry with backoff
+Invalid media	Mark failed
+Network error	Retry (max 3 times)
+10. Security Best Practices
+
+Encrypt access tokens (AES-256)
+
+Never expose tokens to frontend
+
+Validate scheduled time (future only)
+
+Role-based access (admin/editor)
+
+Webhook signature verification
+
+11. Optional Enhancements
+
+✨ Post preview per platform
+
+📊 Analytics & insights
+
+🔔 Webhooks for publish status
+
+🌍 Timezone-aware scheduling
+
+🧠 AI caption generator
+
+12. Tech Stack Recommendation
+Layer	Tech
+Backend	Node.js, Express 
+DB	mongodb
+Auth	JWT + OAuth

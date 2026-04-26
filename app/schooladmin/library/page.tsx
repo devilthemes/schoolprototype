@@ -1,10 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import { Button } from "react-bootstrap";
 const LibraryPage = () => {
   const [data, setData] = useState([
     { class: "1", files: 20, bookmarks: 5 },
@@ -18,37 +18,50 @@ const LibraryPage = () => {
     { class: "9", files: 100, bookmarks: 13 },
     { class: "10", files: 110, bookmarks: 14 },
   ]);
+  const [showFilter, setShowFilter] = useState(false);
 
+  const handleAdd = () => {
+    // Add student logic here
+  };
+  const router = useRouter();
   return (
-    <div className="d-flex align-items-center py-4 bg-body-tertiary">
-      <Container>
-        <Row className="justify-content-center">
-          <Col xs={12} sm={10} md={8} lg={6} xl={5}>
-            <main className="form-signin w-100 m-auto">
-              <h1>Library</h1>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Class</th>
-                    <th>Files</th>
-                    <th>Bookmarks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.class}</td>
-                      <td>{item.files}</td>
-                      <td>{item.bookmarks}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </main>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <>
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 className="h2">Library</h1>
+      </div>
+      <Row>
+        <Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Files</th>
+                <th>Bookmarks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.class}</td>
+                  <td>{item.files}</td>
+                  <td>{item.bookmarks}</td>
+                  <td>
+                    <Button
+                      onClick={() =>
+                        router.push(`/schooladmin/library/subject`)
+                      }
+                    >
+                      Show Subjects
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </>
   );
 };
 

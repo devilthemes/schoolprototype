@@ -1,37 +1,40 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
-import { useRouter } from "next/navigation";
-const SubjectPage = () => {
+const LibraryPage = () => {
   const [data, setData] = useState([
-    { class: "Science", files: 20, bookmarks: 5 },
-    { class: "English", files: 35, bookmarks: 7 },
-    { class: "Mathematics", files: 40, bookmarks: 6 },
-    { class: "Social Studies", files: 50, bookmarks: 8 },
-    { class: "History", files: 60, bookmarks: 9 },
-    { class: "Geography", files: 70, bookmarks: 10 },
-    { class: "Physics", files: 80, bookmarks: 11 },
+    { class: "1", files: 20, bookmarks: 5 },
+    { class: "2", files: 35, bookmarks: 7 },
+    { class: "3", files: 40, bookmarks: 6 },
+    { class: "4", files: 50, bookmarks: 8 },
+    { class: "5", files: 60, bookmarks: 9 },
+    { class: "6", files: 70, bookmarks: 10 },
+    { class: "7", files: 80, bookmarks: 11 },
+    { class: "8", files: 90, bookmarks: 12 },
+    { class: "9", files: 100, bookmarks: 13 },
+    { class: "10", files: 110, bookmarks: 14 },
   ]);
   const [showFilter, setShowFilter] = useState(false);
-  const router = useRouter();
+
   const handleAdd = () => {
     // Add student logic here
   };
-
+  const router = useRouter();
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Subjects</h1>
+        <h1 className="h2">Library</h1>
       </div>
       <Row>
         <Col>
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Class</th>
                 <th>Files</th>
                 <th>Bookmarks</th>
                 <th>Action</th>
@@ -45,11 +48,9 @@ const SubjectPage = () => {
                   <td>{item.bookmarks}</td>
                   <td>
                     <Button
-                      onClick={() =>
-                        router.push(`/schooladmin/library/subject/detail`)
-                      }
+                      onClick={() => router.push(`/teacher/library/subject`)}
                     >
-                      Detail
+                      Show Subjects
                     </Button>
                   </td>
                 </tr>
@@ -62,4 +63,4 @@ const SubjectPage = () => {
   );
 };
 
-export default SubjectPage;
+export default LibraryPage;

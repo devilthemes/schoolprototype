@@ -70,6 +70,9 @@ export default function SchoolLayout({
                   <Nav.Link href="/schooladmin/parents" className="nav-link">
                     Parents
                   </Nav.Link>
+                  <Nav.Link href="/schooladmin/library" className="nav-link">
+                    Library
+                  </Nav.Link>
                 </Nav>
                 <hr className="my-3" />
                 <Nav className="flex-column">

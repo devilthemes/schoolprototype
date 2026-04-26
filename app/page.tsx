@@ -15,8 +15,10 @@ export default function Home() {
       router.push("/superadmin");
     } else if (email === "schooladmin@gmail.com") {
       router.push("/schooladmin");
+    } else if (email === "teacher@gmail.com") {
+      router.push("/teacher");
     } else {
-      alert("Invalid email. Use superadmin@gmail.com or schooladmin@gmail.com");
+      alert("Invalid email. Use superadmin@gmail.com, schooladmin@gmail.com or teacher@gmail.com");
     }
   };
 
