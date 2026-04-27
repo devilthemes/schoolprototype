@@ -25,6 +25,7 @@ interface TeacherItem {
   subjects: string[];
   email: string;
   phone: string;
+  password?: string;
   profileImage: string | null;
 }
 
@@ -235,6 +236,7 @@ export default function TeachersPage() {
   ]);
 
   const [showModal, setShowModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [editingTeacher, setEditingTeacher] = useState<TeacherItem | null>(
     null,
@@ -410,7 +412,10 @@ export default function TeachersPage() {
     setAppliedFilters({ teacherName: "", subject: "", phone: "", email: "" });
     setCurrentPage(1);
   };
-
+  const changePassword = () => {
+    setShowModal(false);
+    setShowChangePasswordModal(true);
+  };
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -571,6 +576,42 @@ export default function TeachersPage() {
           </Pagination>
         </div>
       )}
+
+      {/* Change Password Modal Box */}
+      <Modal
+        show={showChangePasswordModal}
+        onHide={() => setShowChangePasswordModal(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Change Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Change password functionality to be implemented.</p>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <div className="d-flex flex-wrap gap-2">
+                <Form.Control
+                  type="text"
+                  value=""
+                  onChange={() => console.log()}
+                  autoFocus
+                />
+              </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowChangePasswordModal(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -668,6 +709,23 @@ export default function TeachersPage() {
                 placeholder="e.g., john.smith@example.com"
               />
             </Form.Group>
+
+            {!editingTeacher ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                />
+              </Form.Group>
+            ) : (
+              <Form.Group className="mb-3">
+                <Button onClick={changePassword}>Change Password</Button>
+              </Form.Group>
+            )}
             <Form.Group className="mb-3">
               <Form.Label>Phone</Form.Label>
               <Form.Control
@@ -680,6 +738,9 @@ export default function TeachersPage() {
               />
             </Form.Group>
           </Form>
+          <Form.Group controlId="studentCheckboxGroup">
+            <Form.Check type="checkbox" label="Parental Control" value="yes" />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>

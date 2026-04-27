@@ -33,6 +33,7 @@ interface StudentItem {
 export default function StudentsPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [students, setStudents] = useState<StudentItem[]>([
     {
       id: 1,
@@ -493,7 +494,10 @@ export default function StudentsPage() {
     setAppliedFilters({ studentName: "", className: "", phone: "", email: "" });
     setCurrentPage(1);
   };
-
+  const changePassword = () => {
+    setShowModal(false);
+    setShowChangePasswordModal(true);
+  };
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -836,6 +840,20 @@ export default function StudentsPage() {
                 placeholder="e.g., alice@example.com"
               />
             </Form.Group>
+            {!editingStudent ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={""}
+                  onChange={() => console.log()}
+                />
+              </Form.Group>
+            ) : (
+              <Form.Group className="mb-3">
+                <Button onClick={changePassword}>Change Password</Button>
+              </Form.Group>
+            )}
             <Form.Group className="mb-3">
               <Form.Label>Phone</Form.Label>
               <Form.Control
@@ -848,6 +866,9 @@ export default function StudentsPage() {
               />
             </Form.Group>
           </Form>
+          <Form.Group controlId="studentCheckboxGroup">
+            <Form.Check type="checkbox" label="Parental Control" value="yes" />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -862,7 +883,40 @@ export default function StudentsPage() {
           </Button>
         </Modal.Footer>
       </Modal>
-
+      {/* Change Password Modal Box */}
+      <Modal
+        show={showChangePasswordModal}
+        onHide={() => setShowChangePasswordModal(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Change Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Change password functionality to be implemented.</p>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <div className="d-flex flex-wrap gap-2">
+                <Form.Control
+                  type="text"
+                  value=""
+                  onChange={() => console.log()}
+                  autoFocus
+                />
+              </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowChangePasswordModal(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}

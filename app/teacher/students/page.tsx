@@ -847,6 +847,13 @@ export default function StudentPage() {
                 placeholder="e.g., 555-123-4567"
               />
             </Form.Group>
+            <Form.Group controlId="studentCheckboxGroup">
+              <Form.Check
+                type="checkbox"
+                label="Parental Control"
+                value="yes"
+              />
+            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
